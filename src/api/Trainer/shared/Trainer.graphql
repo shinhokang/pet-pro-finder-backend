@@ -1,0 +1,16 @@
+type Trainer {
+  id: Int!
+  userId: Int
+  user: User!
+  description: String!
+  licenses: [String]
+  experiences: [String]
+  images: [String]
+  videos: [String]
+  trainingPrograms: [TrainingProgram]
+  comments: [Comment]
+  reviews: [Review]
+  favorites: [Favorite]
+  createdAt: String!
+  updatedAt: String
+}

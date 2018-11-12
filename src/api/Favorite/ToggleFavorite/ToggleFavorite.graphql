@@ -1,0 +1,9 @@
+type ToggleFavoriteResponse {
+  ok: Boolean!
+  error: String
+  add: Boolean!
+}
+
+type Mutation {
+  ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
+}

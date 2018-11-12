@@ -1,0 +1,22 @@
+type User {
+  id: Int!
+  email: String
+  username: String!
+  firstName: String!
+  lastName: String!
+  naverId: String
+  kakaoId: String
+  fbId: String
+  googleId: String
+  phoneNumber: String
+  profileDescription: String
+  trainer: Trainer
+  comments: [Comment]
+  reviews: [Review]
+  favorites: [Favorite]
+  fullName: String!
+  isTrainer: Boolean!
+  profilePhoto: String!
+  createdAt: String!
+  updatedAt: String
+}

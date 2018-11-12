@@ -1,0 +1,16 @@
+type CreateTrainerResponse {
+  ok: Boolean!
+  error: String
+  trainer: Trainer
+}
+
+type Mutation {
+  CreateTrainer(
+    userId: Int!
+    description: String!
+    licenses: [String]
+    experiences: [String]
+    images: [String]
+    videos: [String]
+  ): CreateTrainerResponse!
+}

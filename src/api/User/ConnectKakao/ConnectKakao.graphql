@@ -1,0 +1,15 @@
+type ConnectKakaoResponse {
+  ok: Boolean!
+  error: String
+  token: String
+  isNew: Boolean!
+}
+
+type Mutation {
+  ConnectKakao(
+    firstName: String!
+    lastName: String!
+    email: String
+    kakaoId: String!
+  ): ConnectKakaoResponse!
+}

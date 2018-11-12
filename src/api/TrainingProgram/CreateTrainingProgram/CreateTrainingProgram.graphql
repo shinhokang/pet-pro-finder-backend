@@ -1,0 +1,15 @@
+type CreateTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+  trainingProgram: TrainingProgram
+}
+
+type Mutation {
+  CreateTrainingProgram(
+    trainerId: Int!
+    description: String!
+    price: Int!
+    images: [String]
+    videos: [String]
+  ): CreateTrainingProgramResponse!
+}

@@ -1,0 +1,9 @@
+type Favorite {
+  id: Int!
+  userId: Int
+  user: User!
+  trainerId: Int
+  trainer: Trainer!
+  createdAt: String!
+  updatedAt: String
+}

@@ -1,0 +1,8 @@
+type DeleteTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
+}

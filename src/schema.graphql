@@ -1,0 +1,229 @@
+type CreateCommentResponse {
+  ok: Boolean!
+  error: String
+  comment: Comment
+}
+
+type Mutation {
+  CreateComment(text: String!, trainerId: Int!, commentId: Int): CreateCommentResponse!
+  DeleteComment(commentId: Int!): DeleteCommentResponse!
+  EditComment(commentId: Int!, text: String!): EditCommentResponse!
+  ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
+  CreateReview(text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, trainerId: Int!): CreateReviewResponse!
+  DeleteReview(reviewId: Int!): DeleteReviewResponse!
+  EditReview(reviewId: Int!, text: String!, ratingForExpertise: Int!, ratingForFriendliness: Int!): EditReviewResponse!
+  CreateTrainer(userId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String]): CreateTrainerResponse!
+  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String]): EditTrainerResponse!
+  CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, images: [String], videos: [String]): CreateTrainingProgramResponse!
+  DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
+  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!
+  ConnectFB(firstName: String!, lastName: String!, email: String, fbId: String!): ConnectFBResponse!
+  ConnectGoogle(firstName: String!, lastName: String!, email: String, googleId: String!): ConnectGoogleResponse!
+  ConnectKakao(firstName: String!, lastName: String!, email: String, kakaoId: String!): ConnectKakaoResponse!
+  ConnectNaver(firstName: String!, lastName: String!, email: String, naverId: String!): ConnectNaverResponse!
+  EditUser(username: String, phoneNumber: String, profileDescription: String): EditUserResponse!
+}
+
+type DeleteCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditCommentResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Comment {
+  id: Int!
+  text: String!
+  userId: Int
+  user: User!
+  trainerId: Int
+  trainer: Trainer!
+  parentComment: Comment
+  childComments: [Comment]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Favorite {
+  id: Int!
+  userId: Int
+  user: User!
+  trainerId: Int
+  trainer: Trainer!
+  createdAt: String!
+  updatedAt: String
+}
+
+type ToggleFavoriteResponse {
+  ok: Boolean!
+  error: String
+  add: Boolean!
+}
+
+type CreateReviewResponse {
+  ok: Boolean!
+  error: String
+  review: Review
+}
+
+type DeleteReviewResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditReviewResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Review {
+  id: Int!
+  text: String!
+  ratingForExpertise: Float!
+  ratingForFriendliness: Float!
+  userId: Int
+  user: User!
+  trainerId: Int
+  trainer: Trainer!
+  createdAt: String!
+  updatedAt: String
+}
+
+type CreateTrainerResponse {
+  ok: Boolean!
+  error: String
+  trainer: Trainer
+}
+
+type EditTrainerResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetAllTrainersResponse {
+  ok: Boolean!
+  error: String
+  trainers: [Trainer]
+}
+
+type Query {
+  GetAllTrainers: GetAllTrainersResponse!
+  CheckUsername(username: String!): CheckUsernameResponse!
+  Me: MeResponse!
+}
+
+type Trainer {
+  id: Int!
+  userId: Int
+  user: User!
+  description: String!
+  licenses: [String]
+  experiences: [String]
+  images: [String]
+  videos: [String]
+  trainingPrograms: [TrainingProgram]
+  comments: [Comment]
+  reviews: [Review]
+  favorites: [Favorite]
+  createdAt: String!
+  updatedAt: String
+}
+
+type CreateTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+  trainingProgram: TrainingProgram
+}
+
+type DeleteTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+}
+
+type TrainingProgram {
+  id: Int!
+  trainerId: Int
+  trainer: Trainer!
+  description: String
+  price: Int
+  images: [String]
+  videos: [String]
+  createdAt: String!
+  updatedAt: String
+}
+
+type CheckUsernameResponse {
+  ok: Boolean!
+  available: Boolean
+  error: String
+}
+
+type ConnectFBResponse {
+  ok: Boolean!
+  error: String
+  token: String
+  isNew: Boolean!
+}
+
+type ConnectGoogleResponse {
+  ok: Boolean!
+  error: String
+  token: String
+  isNew: Boolean!
+}
+
+type ConnectKakaoResponse {
+  ok: Boolean!
+  error: String
+  token: String
+  isNew: Boolean!
+}
+
+type ConnectNaverResponse {
+  ok: Boolean!
+  error: String
+  token: String
+  isNew: Boolean!
+}
+
+type EditUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type MeResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type User {
+  id: Int!
+  email: String
+  username: String!
+  firstName: String!
+  lastName: String!
+  naverId: String
+  kakaoId: String
+  fbId: String
+  googleId: String
+  phoneNumber: String
+  profileDescription: String
+  trainer: Trainer
+  comments: [Comment]
+  reviews: [Review]
+  favorites: [Favorite]
+  fullName: String!
+  isTrainer: Boolean!
+  profilePhoto: String!
+  createdAt: String!
+  updatedAt: String
+}

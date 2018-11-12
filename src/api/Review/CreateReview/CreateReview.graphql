@@ -1,0 +1,14 @@
+type CreateReviewResponse {
+  ok: Boolean!
+  error: String
+  review: Review
+}
+
+type Mutation {
+  CreateReview(
+    text: String!
+    ratingForExpertise: Float!
+    ratingForFriendliness: Float!
+    trainerId: Int!
+  ): CreateReviewResponse!
+}

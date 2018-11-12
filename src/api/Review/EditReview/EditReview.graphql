@@ -1,0 +1,13 @@
+type EditReviewResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditReview(
+    reviewId: Int!
+    text: String!
+    ratingForExpertise: Int!
+    ratingForFriendliness: Int!
+  ): EditReviewResponse!
+}

@@ -1,0 +1,15 @@
+type EditTrainerResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditTrainer(
+    trainerId: Int!
+    description: String!
+    licenses: [String]
+    experiences: [String]
+    images: [String]
+    videos: [String]
+  ): EditTrainerResponse!
+}

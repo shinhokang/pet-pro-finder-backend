@@ -1,0 +1,11 @@
+type TrainingProgram {
+  id: Int!
+  trainerId: Int
+  trainer: Trainer!
+  description: String
+  price: Int
+  images: [String]
+  videos: [String]
+  createdAt: String!
+  updatedAt: String
+}

@@ -1,0 +1,9 @@
+type GetAllTrainersResponse {
+  ok: Boolean!
+  error: String
+  trainers: [Trainer]
+}
+
+type Query {
+  GetAllTrainers: GetAllTrainersResponse!
+}

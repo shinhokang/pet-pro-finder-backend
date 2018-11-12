@@ -1,0 +1,14 @@
+type EditTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditTrainingProgram(
+    trainingProgramId: Int!
+    description: String
+    price: Int
+    images: [String]
+    videos: [String]
+  ): EditTrainingProgramResponse!
+}
