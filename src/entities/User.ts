@@ -8,18 +8,21 @@ import Favorite from "./Favorite";
 
 @Entity()
 class User extends Abstract {
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "text", unique: true, nullable: false })
   @IsEmail()
-  email: string | null;
-
-  @Column({ type: "text", unique: true, nullable: true })
-  username: string;
+  email: string;
 
   @Column({ type: "text", nullable: true })
-  firstName: string;
+  username: string | null;
 
   @Column({ type: "text", nullable: true })
-  lastName: string;
+  firstName: string | null;
+
+  @Column({ type: "text", nullable: true })
+  lastName: string | null;
+
+  @Column({ type: "text", nullable: true })
+  password: string | null;
 
   @Column({ type: "text", nullable: true })
   naverId: string | null;
@@ -58,7 +61,7 @@ class User extends Abstract {
   favorites: Favorite[];
 
   get fullName(): string {
-    return `${this.lastName} ${this.firstName} `;
+    return `${this.lastName}${this.firstName} `;
   }
 
   get isTrainer(): boolean {
