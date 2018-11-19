@@ -8,7 +8,7 @@ import Favorite from "./Favorite";
 
 @Entity()
 class Trainer extends Abstract {
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   userId: number;
 
   @OneToOne(type => User, user => user.trainer, { onDelete: "CASCADE" })
