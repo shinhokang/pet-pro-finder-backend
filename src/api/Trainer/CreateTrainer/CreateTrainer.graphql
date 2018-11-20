@@ -6,11 +6,11 @@ type CreateTrainerResponse {
 
 type Mutation {
   CreateTrainer(
-    userId: Int!
     description: String!
     licenses: [String]
     experiences: [String]
     images: [String]
     videos: [String]
+    workingAreas: [String]
   ): CreateTrainerResponse!
 }

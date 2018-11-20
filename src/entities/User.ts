@@ -13,13 +13,7 @@ class User extends Abstract {
   email: string;
 
   @Column({ type: "text", nullable: true })
-  username: string | null;
-
-  @Column({ type: "text", nullable: true })
-  firstName: string | null;
-
-  @Column({ type: "text", nullable: true })
-  lastName: string | null;
+  name: string | null;
 
   @Column({ type: "text", nullable: true })
   password: string | null;
@@ -40,7 +34,10 @@ class User extends Abstract {
   phoneNumber: string | null;
 
   @Column({ type: "text", nullable: true })
-  profileDescription: string | null;
+  description: string | null;
+
+  @Column({ type: "text", nullable: true })
+  profileImage: string | null;
 
   @OneToOne(type => Trainer, trainer => trainer.user, {
     onDelete: "CASCADE"
@@ -60,16 +57,15 @@ class User extends Abstract {
   })
   favorites: Favorite[];
 
-  get fullName(): string {
-    return `${this.lastName}${this.firstName} `;
-  }
-
   get isTrainer(): boolean {
     return this.trainer ? true : false;
   }
 
   get profilePhoto(): string {
-    return `https://graph.facebook.com/${this.fbId}/picture?type=square`;
+    if (this.fbId) {
+      return `https://graph.facebook.com/${this.fbId}/picture?type=square`;
+    }
+    return this.profileImage ? this.profileImage : "";
   }
 }
 

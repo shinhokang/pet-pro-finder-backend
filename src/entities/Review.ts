@@ -8,23 +8,17 @@ class Review extends Abstract {
   @Column({ type: "text" })
   text: string;
 
-  @Column({ type: "decimal" })
+  @Column({ type: "real" })
   ratingForExpertise: number;
 
-  @Column({ type: "decimal" })
+  @Column({ type: "real" })
   ratingForFriendliness: number;
-
-  @Column({ nullable: true })
-  userId: number;
 
   @ManyToOne(type => User, user => user.reviews, {
     onDelete: "CASCADE",
     eager: true
   })
   user: User;
-
-  @Column({ nullable: true })
-  trainerId: number;
 
   @ManyToOne(type => Trainer, trainer => trainer.reviews, {
     onDelete: "CASCADE"

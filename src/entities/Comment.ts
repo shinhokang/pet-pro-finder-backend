@@ -19,17 +19,11 @@ class Comment extends Abstract {
   })
   childComments: Comment[];
 
-  @Column({ nullable: true })
-  userId: number;
-
   @ManyToOne(type => User, user => user.comments, {
     onDelete: "CASCADE",
     eager: true
   })
   user: User;
-
-  @Column({ nullable: true })
-  trainerId: number;
 
   @ManyToOne(type => Trainer, trainer => trainer.comments, {
     onDelete: "CASCADE"

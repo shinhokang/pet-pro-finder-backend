@@ -8,26 +8,26 @@ import Favorite from "./Favorite";
 
 @Entity()
 class Trainer extends Abstract {
-  @Column({ nullable: false })
-  userId: number;
-
-  @OneToOne(type => User, user => user.trainer, { onDelete: "CASCADE" })
-  user: User;
-
   @Column({ type: "text", nullable: true })
   description: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "simple-array", nullable: true })
   licenses: string[] | null;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "simple-array", nullable: true })
   experiences: string[] | null;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "simple-array", nullable: true })
   images: string[] | null;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "simple-array", nullable: true })
   videos: string[] | null;
+
+  @Column({ type: "simple-array", nullable: true })
+  workingAreas: string[] | null;
+
+  @OneToOne(type => User, user => user.trainer, { onDelete: "CASCADE" })
+  user: User;
 
   @OneToMany(
     type => TrainingProgram,

@@ -1,13 +1,15 @@
-type EditUserResponse {
+type JoinResponse {
   ok: Boolean!
   error: String
+  token: String
 }
 
 type Mutation {
-  EditUser(
+  Join(
+    email: String
     name: String
     phoneNumber: String
     description: String
     profileImage: String
-  ): EditUserResponse!
+  ): JoinResponse!
 }

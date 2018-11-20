@@ -6,9 +6,9 @@ type CreateReviewResponse {
 
 type Mutation {
   CreateReview(
+    trainerId: Int!
     text: String!
     ratingForExpertise: Float!
     ratingForFriendliness: Float!
-    trainerId: Int!
   ): CreateReviewResponse!
 }

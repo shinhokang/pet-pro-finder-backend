@@ -3,9 +3,7 @@ type Review {
   text: String!
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
-  userId: Int
   user: User!
-  trainerId: Int
   trainer: Trainer!
   createdAt: String!
   updatedAt: String

@@ -11,5 +11,6 @@ type Mutation {
     experiences: [String]
     images: [String]
     videos: [String]
+    workingAreas: [String]
   ): EditTrainerResponse!
 }

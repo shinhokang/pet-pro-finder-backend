@@ -9,19 +9,18 @@ type Mutation {
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, text: String!): EditCommentResponse!
   ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
-  CreateReview(text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, trainerId: Int!): CreateReviewResponse!
+  CreateReview(trainerId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): CreateReviewResponse!
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
-  EditReview(reviewId: Int!, text: String!, ratingForExpertise: Int!, ratingForFriendliness: Int!): EditReviewResponse!
-  CreateTrainer(userId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String]): CreateTrainerResponse!
-  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String]): EditTrainerResponse!
-  CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, images: [String], videos: [String]): CreateTrainingProgramResponse!
+  EditReview(reviewId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): EditReviewResponse!
+  CreateTrainer(description: String!, licenses: [String], experiences: [String], images: [String], videos: [String], workingAreas: [String]): CreateTrainerResponse!
+  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String], workingAreas: [String]): EditTrainerResponse!
+  CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!
   DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
-  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!
+  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, problemCategories: [String], images: [String], videos: [String]): EditTrainingProgramResponse!
   ConnectFB(firstName: String!, lastName: String!, email: String, fbId: String!): ConnectFBResponse!
-  ConnectGoogle(firstName: String!, lastName: String!, email: String, googleId: String!): ConnectGoogleResponse!
-  ConnectKakao(firstName: String!, lastName: String!, email: String, kakaoId: String!): ConnectKakaoResponse!
-  ConnectNaver(firstName: String!, lastName: String!, email: String, naverId: String!): ConnectNaverResponse!
-  EditUser(username: String, phoneNumber: String, profileDescription: String): EditUserResponse!
+  EditUser(name: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!
+  Join(email: String, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!
+  Login(email: String!, password: String!): LoginResponse!
 }
 
 type DeleteCommentResponse {
@@ -37,21 +36,18 @@ type EditCommentResponse {
 type Comment {
   id: Int!
   text: String!
-  userId: Int
-  user: User!
-  trainerId: Int
-  trainer: Trainer!
   parentComment: Comment
   childComments: [Comment]
+  user: User!
+  trainer: Trainer!
   createdAt: String!
   updatedAt: String
 }
 
 type Favorite {
   id: Int!
-  userId: Int
+  marked: Boolean!
   user: User!
-  trainerId: Int
   trainer: Trainer!
   createdAt: String!
   updatedAt: String
@@ -84,9 +80,7 @@ type Review {
   text: String!
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
-  userId: Int
   user: User!
-  trainerId: Int
   trainer: Trainer!
   createdAt: String!
   updatedAt: String
@@ -111,19 +105,18 @@ type GetAllTrainersResponse {
 
 type Query {
   GetAllTrainers: GetAllTrainersResponse!
-  CheckUsername(username: String!): CheckUsernameResponse!
   Me: MeResponse!
 }
 
 type Trainer {
   id: Int!
-  userId: Int
-  user: User!
   description: String!
   licenses: [String]
   experiences: [String]
   images: [String]
   videos: [String]
+  workingAreas: [String]
+  user: User!
   trainingPrograms: [TrainingProgram]
   comments: [Comment]
   reviews: [Review]
@@ -150,44 +143,17 @@ type EditTrainingProgramResponse {
 
 type TrainingProgram {
   id: Int!
-  trainerId: Int
-  trainer: Trainer!
   description: String
   price: Int
+  problemCategories: [String]
   images: [String]
   videos: [String]
+  trainer: Trainer!
   createdAt: String!
   updatedAt: String
 }
 
-type CheckUsernameResponse {
-  ok: Boolean!
-  available: Boolean
-  error: String
-}
-
 type ConnectFBResponse {
-  ok: Boolean!
-  error: String
-  token: String
-  isNew: Boolean!
-}
-
-type ConnectGoogleResponse {
-  ok: Boolean!
-  error: String
-  token: String
-  isNew: Boolean!
-}
-
-type ConnectKakaoResponse {
-  ok: Boolean!
-  error: String
-  token: String
-  isNew: Boolean!
-}
-
-type ConnectNaverResponse {
   ok: Boolean!
   error: String
   token: String
@@ -199,6 +165,18 @@ type EditUserResponse {
   error: String
 }
 
+type JoinResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type LoginResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
 type MeResponse {
   ok: Boolean!
   error: String
@@ -207,21 +185,19 @@ type MeResponse {
 
 type User {
   id: Int!
-  email: String
-  username: String!
-  firstName: String!
-  lastName: String!
+  email: String!
+  name: String
   naverId: String
   kakaoId: String
   fbId: String
   googleId: String
   phoneNumber: String
-  profileDescription: String
+  description: String
+  profileImage: String
   trainer: Trainer
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]
-  fullName: String!
   isTrainer: Boolean!
   profilePhoto: String!
   createdAt: String!

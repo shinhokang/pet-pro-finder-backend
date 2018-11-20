@@ -9,6 +9,7 @@ type Mutation {
     trainerId: Int!
     description: String!
     price: Int!
+    problemCategories: [String]
     images: [String]
     videos: [String]
   ): CreateTrainingProgramResponse!
