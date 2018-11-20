@@ -19,7 +19,7 @@ type Mutation {
   EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, problemCategories: [String], images: [String], videos: [String]): EditTrainingProgramResponse!
   ConnectFB(firstName: String!, lastName: String!, email: String, fbId: String!): ConnectFBResponse!
   EditUser(name: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!
-  Join(email: String, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!
+  Join(email: String!, password: String!, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!
   Login(email: String!, password: String!): LoginResponse!
 }
 
@@ -169,6 +169,7 @@ type JoinResponse {
   ok: Boolean!
   error: String
   token: String
+  isNew: Boolean!
 }
 
 type LoginResponse {
@@ -187,6 +188,7 @@ type User {
   id: Int!
   email: String!
   name: String
+  password: String
   naverId: String
   kakaoId: String
   fbId: String

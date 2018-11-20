@@ -2,11 +2,13 @@ type JoinResponse {
   ok: Boolean!
   error: String
   token: String
+  isNew: Boolean!
 }
 
 type Mutation {
   Join(
-    email: String
+    email: String!
+    password: String!
     name: String
     phoneNumber: String
     description: String

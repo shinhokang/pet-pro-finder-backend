@@ -2,6 +2,7 @@ type User {
   id: Int!
   email: String!
   name: String
+  password: String
   naverId: String
   kakaoId: String
   fbId: String

@@ -6,6 +6,7 @@ type EditUserResponse {
 type Mutation {
   EditUser(
     name: String
+    password: String
     phoneNumber: String
     description: String
     profileImage: String

@@ -1,8 +1,8 @@
-import { Not } from "typeorm";
 import User from "../../../entities/User";
 import { EditUserMutationArgs, EditUserResponse } from "../../../types/graph";
 import cleanNullArgs from "../../../utils/cleanNull";
 import privateResolver from "../../../utils/privateResolver";
+import bcrypt from "bcrypt";
 
 const resolvers = {
   Mutation: {
@@ -14,20 +14,10 @@ const resolvers = {
       ): Promise<EditUserResponse> => {
         const user: User = req.user;
         try {
-          const notNull: any = cleanNullArgs(args);
-          if (notNull.username) {
-            const existing = await User.findOne({
-              where: {
-                id: Not(user.id),
-                username: notNull.username
-              }
-            });
-            if (existing) {
-              return {
-                ok: false,
-                error: "Username taken, try a different one"
-              };
-            }
+          let notNull: any = cleanNullArgs(args);
+          if (notNull.password) {
+            const passwordHash = bcrypt.hashSync(notNull.password, 10);
+            notNull = { ...notNull, password: passwordHash };
           }
           await User.update({ id: user.id }, { ...notNull });
           return {
