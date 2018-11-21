@@ -11,6 +11,7 @@ type User {
   description: String
   profileImage: String
   trainer: Trainer
+  trainerId: Int
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]
