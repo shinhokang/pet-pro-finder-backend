@@ -17,8 +17,7 @@ type Mutation {
   CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!
   DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
   EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, problemCategories: [String], images: [String], videos: [String]): EditTrainingProgramResponse!
-  ConnectFB(firstName: String!, lastName: String!, email: String, fbId: String!): ConnectFBResponse!
-  EditUser(name: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!
+  EditUser(name: String, password: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!
   Join(email: String!, password: String!, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!
   Login(email: String!, password: String!): LoginResponse!
 }
@@ -151,13 +150,6 @@ type TrainingProgram {
   trainer: Trainer!
   createdAt: String!
   updatedAt: String
-}
-
-type ConnectFBResponse {
-  ok: Boolean!
-  error: String
-  token: String
-  isNew: Boolean!
 }
 
 type EditUserResponse {

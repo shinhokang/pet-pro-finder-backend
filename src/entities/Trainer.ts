@@ -26,7 +26,9 @@ class Trainer extends Abstract {
   @Column({ type: "simple-array", nullable: true })
   workingAreas: string[] | null;
 
-  @OneToOne(type => User, user => user.trainer, { onDelete: "CASCADE" })
+  @OneToOne(type => User, user => user.trainer, {
+    onDelete: "CASCADE"
+  })
   user: User;
 
   @OneToMany(

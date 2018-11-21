@@ -15,13 +15,11 @@ const resolvers: Resolvers = {
         }
         const hash = user.password;
         if (!hash) {
+          throw new Error("No password saved");
+        }
+        if (!bcrypt.compareSync(password, hash)) {
           throw new Error("Password not match");
         }
-        bcrypt.compare(password, hash, (err, res) => {
-          if (!res) {
-            throw new Error("Password not match");
-          }
-        });
 
         const token = await createJWT(user.id);
         return {

@@ -1,5 +1,5 @@
 import { IsEmail } from "class-validator";
-import { Column, Entity, OneToOne, OneToMany } from "typeorm";
+import { Column, Entity, OneToOne, OneToMany, JoinColumn } from "typeorm";
 import Abstract from "./Abstract";
 import Trainer from "./Trainer";
 import Comment from "./Comment";
@@ -42,7 +42,11 @@ class User extends Abstract {
   @OneToOne(type => Trainer, trainer => trainer.user, {
     onDelete: "CASCADE"
   })
+  @JoinColumn()
   trainer: Trainer | null;
+
+  @Column({ type: "number", nullable: true })
+  trainerId: number | null;
 
   @OneToMany(type => Comment, comment => comment.user, { onDelete: "CASCADE" })
   comments: Comment[];
@@ -58,7 +62,7 @@ class User extends Abstract {
   favorites: Favorite[];
 
   get isTrainer(): boolean {
-    return this.trainer ? true : false;
+    return this.trainerId ? true : false;
   }
 
   get profilePhoto(): string {

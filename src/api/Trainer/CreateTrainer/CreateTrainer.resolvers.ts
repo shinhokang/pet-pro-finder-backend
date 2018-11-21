@@ -16,16 +16,17 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<CreateTrainerResponse> => {
         const user: User = req.user;
-        const { description, licenses, experiences, images, videos } = args;
+        const {
+          description,
+          licenses,
+          experiences,
+          images,
+          videos,
+          workingAreas
+        } = args;
         try {
-          let trainer: Trainer | undefined;
-          trainer = await Trainer.findOne({ userId: user.id });
-          if (trainer) {
-            return {
-              ok: false,
-              error: `Trainer already exists`,
-              trainer: null
-            };
+          if (user.isTrainer) {
+            throw new Error("Trainer already exists");
           }
           const newTrainer = await Trainer.create({
             description,
@@ -33,14 +34,11 @@ const resolvers: Resolvers = {
             experiences,
             images,
             videos,
+            workingAreas,
             user
           }).save();
           if (!newTrainer) {
-            return {
-              ok: false,
-              error: `Cant create trainer`,
-              trainer: null
-            };
+            throw new Error("Cant create trainer");
           }
           return {
             ok: true,
