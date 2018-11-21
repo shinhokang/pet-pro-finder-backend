@@ -2,9 +2,12 @@ type Comment {
   id: Int!
   text: String!
   parentComment: Comment
+  parentCommentId: Int
   childComments: [Comment]
   user: User!
+  userId: Int
   trainer: Trainer!
+  trainerId: Int
   createdAt: String!
   updatedAt: String
 }

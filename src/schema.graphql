@@ -12,11 +12,11 @@ type Mutation {
   CreateReview(trainerId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): CreateReviewResponse!
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
   EditReview(reviewId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): EditReviewResponse!
-  CreateTrainer(description: String!, licenses: [String], experiences: [String], images: [String], videos: [String], workingAreas: [String]): CreateTrainerResponse!
+  CreateTrainer(description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): CreateTrainerResponse!
   EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String], workingAreas: [String]): EditTrainerResponse!
   CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!
   DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
-  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, problemCategories: [String], images: [String], videos: [String]): EditTrainingProgramResponse!
+  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!
   EditUser(name: String, password: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!
   Join(email: String!, password: String!, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!
   Login(email: String!, password: String!): LoginResponse!
@@ -36,9 +36,21 @@ type Comment {
   id: Int!
   text: String!
   parentComment: Comment
+  parentCommentId: Int
   childComments: [Comment]
   user: User!
+  userId: Int
   trainer: Trainer!
+  trainerId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type Experience {
+  id: Int!
+  text: String!
+  trainer: Trainer!
+  trainerId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -47,7 +59,9 @@ type Favorite {
   id: Int!
   marked: Boolean!
   user: User!
+  userId: Int
   trainer: Trainer!
+  trainerId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -56,6 +70,22 @@ type ToggleFavoriteResponse {
   ok: Boolean!
   error: String
   add: Boolean!
+}
+
+type License {
+  id: Int!
+  text: String!
+  trainer: Trainer!
+  trainerId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type ProblemCategory {
+  id: Int!
+  name: String!
+  createdAt: String!
+  updatedAt: String
 }
 
 type CreateReviewResponse {
@@ -77,11 +107,13 @@ type EditReviewResponse {
 type Review {
   id: Int!
   text: String!
-  problemCategories: [String]
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
   user: User!
+  userId: Int
   trainer: Trainer!
+  trainerId: Int
+  problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String
 }
@@ -127,11 +159,11 @@ type GetTrainerResponse {
 type Trainer {
   id: Int!
   description: String!
-  licenses: [String]
-  experiences: [String]
+  licenses: [License]
+  experiences: [Experience]
   images: [String]
   videos: [String]
-  workingAreas: [String]
+  workingAreas: [WorkingArea]
   user: User!
   trainingPrograms: [TrainingProgram]
   comments: [Comment]
@@ -161,10 +193,11 @@ type TrainingProgram {
   id: Int!
   description: String
   price: Int
-  problemCategories: [String]
   images: [String]
   videos: [String]
   trainer: Trainer!
+  trainerId: Int
+  problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String
 }
@@ -212,6 +245,15 @@ type User {
   favorites: [Favorite]
   isTrainer: Boolean!
   profilePhoto: String!
+  createdAt: String!
+  updatedAt: String
+}
+
+type WorkingArea {
+  id: Int!
+  text: String!
+  trainer: Trainer!
+  trainerId: Int
   createdAt: String!
   updatedAt: String
 }

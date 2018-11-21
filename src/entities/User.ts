@@ -39,26 +39,20 @@ class User extends Abstract {
   @Column({ type: "text", nullable: true })
   profileImage: string | null;
 
-  @OneToOne(type => Trainer, trainer => trainer.user, {
-    onDelete: "CASCADE"
-  })
+  @OneToOne(type => Trainer, trainer => trainer.user)
   @JoinColumn()
   trainer: Trainer | null;
 
   @Column({ type: "number", nullable: true })
   trainerId: number | null;
 
-  @OneToMany(type => Comment, comment => comment.user, { onDelete: "CASCADE" })
+  @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];
 
-  @OneToMany(type => Review, review => review.user, {
-    onDelete: "CASCADE"
-  })
+  @OneToMany(type => Review, review => review.user)
   reviews: Review[];
 
-  @OneToMany(type => Favorite, favorite => favorite.user, {
-    onDelete: "CASCADE"
-  })
+  @OneToMany(type => Favorite, favorite => favorite.user)
   favorites: Favorite[];
 
   get isTrainer(): boolean {

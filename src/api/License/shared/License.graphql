@@ -1,8 +1,6 @@
-type Favorite {
+type License {
   id: Int!
-  marked: Boolean!
-  user: User!
-  userId: Int
+  text: String!
   trainer: Trainer!
   trainerId: Int
   createdAt: String!

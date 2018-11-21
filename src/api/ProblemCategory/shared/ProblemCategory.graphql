@@ -1,0 +1,6 @@
+type ProblemCategory {
+  id: Int!
+  name: String!
+  createdAt: String!
+  updatedAt: String
+}

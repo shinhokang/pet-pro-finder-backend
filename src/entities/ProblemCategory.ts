@@ -1,9 +1,9 @@
-import { Column, Entity } from 'typeorm';
-import Abstract from './Abstract';
+import { Column, Entity } from "typeorm";
+import Abstract from "./Abstract";
 
 @Entity()
 class ProblemCategory extends Abstract {
-  @Column({ type: 'text' })
+  @Column({ type: "text" })
   name: string;
 }
 

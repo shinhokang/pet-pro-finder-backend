@@ -9,15 +9,18 @@ class Favorite extends Abstract {
   marked: boolean;
 
   @ManyToOne(type => User, user => user.favorites, {
-    onDelete: "CASCADE",
     eager: true
   })
   user: User;
 
-  @ManyToOne(type => Trainer, trainer => trainer.favorites, {
-    onDelete: "CASCADE"
-  })
+  @Column({ type: "number" })
+  userId: number;
+
+  @ManyToOne(type => Trainer, trainer => trainer.favorites)
   trainer: Trainer;
+
+  @Column({ type: "number" })
+  trainerId: number;
 }
 
 export default Favorite;

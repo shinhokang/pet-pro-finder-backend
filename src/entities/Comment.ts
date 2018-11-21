@@ -9,10 +9,12 @@ class Comment extends Abstract {
   text: string;
 
   @ManyToOne(type => Comment, comment => comment.childComments, {
-    nullable: true,
-    onDelete: "CASCADE"
+    nullable: true
   })
   parentComment: Comment;
+
+  @Column({ type: "number" })
+  parentCommentId: number;
 
   @OneToMany(type => Comment, comment => comment.parentComment, {
     nullable: true
@@ -20,15 +22,18 @@ class Comment extends Abstract {
   childComments: Comment[];
 
   @ManyToOne(type => User, user => user.comments, {
-    onDelete: "CASCADE",
     eager: true
   })
   user: User;
 
-  @ManyToOne(type => Trainer, trainer => trainer.comments, {
-    onDelete: "CASCADE"
-  })
+  @Column({ type: "number" })
+  userId: number;
+
+  @ManyToOne(type => Trainer, trainer => trainer.comments)
   trainer: Trainer;
+
+  @Column({ type: "number" })
+  trainerId: number;
 }
 
 export default Comment;

@@ -1,11 +1,11 @@
 type Trainer {
   id: Int!
   description: String!
-  licenses: [String]
-  experiences: [String]
+  licenses: [License]
+  experiences: [Experience]
   images: [String]
   videos: [String]
-  workingAreas: [String]
+  workingAreas: [WorkingArea]
   user: User!
   trainingPrograms: [TrainingProgram]
   comments: [Comment]
