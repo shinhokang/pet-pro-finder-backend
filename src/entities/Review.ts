@@ -8,6 +8,9 @@ class Review extends Abstract {
   @Column({ type: "text" })
   text: string;
 
+  @Column({ type: "simple-array", nullable: true })
+  problemCategories: string[] | null;
+
   @Column({ type: "real" })
   ratingForExpertise: number;
 

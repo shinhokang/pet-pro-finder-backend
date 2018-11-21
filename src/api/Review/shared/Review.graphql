@@ -1,6 +1,7 @@
 type Review {
   id: Int!
   text: String!
+  problemCategories: [String]
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
   user: User!
