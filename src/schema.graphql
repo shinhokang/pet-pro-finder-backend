@@ -96,15 +96,31 @@ type EditTrainerResponse {
   error: String
 }
 
+type FilterTrainersResponse {
+  ok: Boolean!
+  error: String
+  trainers: [Trainer]
+  page: Int!
+  totalPages: Int!
+}
+
+type Query {
+  FilterTrainers(workingAreas: [String], page: Int, take: Int): FilterTrainersResponse!
+  GetAllTrainers: GetAllTrainersResponse!
+  GetTrainer(trainerId: Int!): GetTrainerResponse!
+  Me: MeResponse!
+}
+
 type GetAllTrainersResponse {
   ok: Boolean!
   error: String
   trainers: [Trainer]
 }
 
-type Query {
-  GetAllTrainers: GetAllTrainersResponse!
-  Me: MeResponse!
+type GetTrainerResponse {
+  ok: Boolean!
+  error: String
+  trainer: Trainer
 }
 
 type Trainer {
@@ -189,6 +205,7 @@ type User {
   description: String
   profileImage: String
   trainer: Trainer
+  trainerId: Int
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]

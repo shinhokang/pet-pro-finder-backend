@@ -1,0 +1,15 @@
+type FilterTrainersResponse {
+  ok: Boolean!
+  error: String
+  trainers: [Trainer]
+  page: Int!
+  totalPages: Int!
+}
+
+type Query {
+  FilterTrainers(
+    workingAreas: [String]
+    page: Int
+    take: Int
+  ): FilterTrainersResponse!
+}
