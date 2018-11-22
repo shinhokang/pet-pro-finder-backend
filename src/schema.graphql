@@ -13,7 +13,7 @@ type Mutation {
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
   EditReview(reviewId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): EditReviewResponse!
   CreateTrainer(description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): CreateTrainerResponse!
-  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], images: [String], videos: [String], workingAreas: [String]): EditTrainerResponse!
+  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): EditTrainerResponse!
   CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!
   DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
   EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!

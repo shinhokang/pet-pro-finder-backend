@@ -6,7 +6,18 @@ const resolvers: Resolvers = {
   Query: {
     GetAllTrainers: async (_, __): Promise<GetAllTrainersResponse> => {
       try {
-        const trainers = await Trainer.find();
+        const trainers = await Trainer.find({
+          relations: [
+            "user",
+            "licenses",
+            "experiences",
+            "workingAreas",
+            "trainingPrograms",
+            "comments",
+            "reviews",
+            "favorites"
+          ]
+        });
         return {
           trainers,
           ok: true,
