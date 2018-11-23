@@ -8,9 +8,7 @@ class Favorite extends Abstract {
   @Column({ type: "boolean" })
   marked: boolean;
 
-  @ManyToOne(type => User, user => user.favorites, {
-    eager: true
-  })
+  @ManyToOne(type => User, user => user.favorites)
   user: User;
 
   @Column({ type: "number" })

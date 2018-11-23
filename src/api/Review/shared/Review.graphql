@@ -1,12 +1,13 @@
 type Review {
   id: Int!
+  title: String!
   text: String!
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
   user: User!
-  userId: Int
+  userId: Int!
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String

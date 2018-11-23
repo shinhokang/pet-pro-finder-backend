@@ -21,9 +21,7 @@ class Comment extends Abstract {
   })
   childComments: Comment[];
 
-  @ManyToOne(type => User, user => user.comments, {
-    eager: true
-  })
+  @ManyToOne(type => User, user => user.comments)
   user: User;
 
   @Column({ type: "number" })

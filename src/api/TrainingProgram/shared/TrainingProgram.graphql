@@ -1,11 +1,12 @@
 type TrainingProgram {
   id: Int!
+  title: String
   description: String
   price: Int
   images: [String]
   videos: [String]
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String

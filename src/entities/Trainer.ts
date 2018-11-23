@@ -1,4 +1,11 @@
-import { Column, Entity, OneToOne, OneToMany } from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToOne,
+  OneToMany,
+  ManyToMany,
+  JoinTable
+} from "typeorm";
 import Abstract from "./Abstract";
 import User from "./User";
 import TrainingProgram from "./TrainingProgram";
@@ -12,13 +19,10 @@ import WorkingArea from "./WorkingArea";
 @Entity()
 class Trainer extends Abstract {
   @Column({ type: "text", nullable: true })
+  title: string | null;
+
+  @Column({ type: "text", nullable: true })
   description: string;
-
-  @OneToMany(type => License, license => license.trainer)
-  licenses: License[];
-
-  @OneToMany(type => Experience, experience => experience.trainer)
-  experiences: Experience[];
 
   @Column({ type: "simple-array", nullable: true })
   images: string[] | null;
@@ -26,11 +30,14 @@ class Trainer extends Abstract {
   @Column({ type: "simple-array", nullable: true })
   videos: string[] | null;
 
-  @OneToMany(type => WorkingArea, workingArea => workingArea.trainer)
-  workingAreas: WorkingArea[];
+  @OneToMany(type => Experience, experience => experience.trainer)
+  experiences: Experience[];
 
   @OneToOne(type => User, user => user.trainer)
   user: User;
+
+  @Column({ type: "number" })
+  userId: number;
 
   @OneToMany(
     type => TrainingProgram,
@@ -46,6 +53,14 @@ class Trainer extends Abstract {
 
   @OneToMany(type => Favorite, favorite => favorite.trainer)
   favorites: Favorite[];
+
+  @ManyToMany(type => WorkingArea)
+  @JoinTable()
+  workingAreas: WorkingArea[];
+
+  @ManyToMany(type => License)
+  @JoinTable()
+  licenses: License[];
 }
 
 export default Trainer;

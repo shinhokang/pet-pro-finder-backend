@@ -1,8 +1,9 @@
 type Experience {
   id: Int!
   text: String!
+  period: String!
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   createdAt: String!
   updatedAt: String
 }

@@ -1,8 +1,7 @@
 type License {
   id: Int!
-  text: String!
-  trainer: Trainer!
-  trainerId: Int
+  name: String!
+  organization: String
   createdAt: String!
   updatedAt: String
 }

@@ -1,8 +1,10 @@
 type WorkingArea {
   id: Int!
   text: String!
-  trainer: Trainer!
-  trainerId: Int
+  parentWorkingArea: WorkingArea
+  parentWorkingAreaId: Int
+  childWorkingAreas: [WorkingArea]
+  trainers: [Trainer]
   createdAt: String!
   updatedAt: String
 }

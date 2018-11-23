@@ -7,6 +7,9 @@ import ProblemCategory from "./ProblemCategory";
 @Entity()
 class Review extends Abstract {
   @Column({ type: "text" })
+  title: string;
+
+  @Column({ type: "text" })
   text: string;
 
   @Column({ type: "real" })
@@ -15,9 +18,7 @@ class Review extends Abstract {
   @Column({ type: "real" })
   ratingForFriendliness: number;
 
-  @ManyToOne(type => User, user => user.reviews, {
-    eager: true
-  })
+  @ManyToOne(type => User, user => user.reviews)
   user: User;
 
   @Column({ type: "number" })

@@ -10,12 +10,12 @@ type User {
   phoneNumber: String
   description: String
   profileImage: String
-  trainer: Trainer
   trainerId: Int
+  trainer: Trainer
+  isTrainer: Boolean!
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]
-  isTrainer: Boolean!
   profilePhoto: String!
   createdAt: String!
   updatedAt: String

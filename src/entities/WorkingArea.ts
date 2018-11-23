@@ -1,17 +1,31 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import Abstract from "./Abstract";
-import Trainer from "./Trainer";
 
 @Entity()
 class WorkingArea extends Abstract {
   @Column({ type: "text" })
   text: string;
 
-  @ManyToOne(type => Trainer, trainer => trainer.workingAreas)
-  trainer: Trainer;
+  @ManyToOne(
+    type => WorkingArea,
+    workingArea => workingArea.childWorkingAreas,
+    {
+      nullable: true
+    }
+  )
+  parentWorkingArea: WorkingArea;
 
   @Column({ type: "number" })
-  trainerId: number;
+  parentWorkingAreaId: number;
+
+  @OneToMany(
+    type => WorkingArea,
+    workingArea => workingArea.parentWorkingArea,
+    {
+      nullable: true
+    }
+  )
+  childWorkingAreas: WorkingArea[];
 }
 
 export default WorkingArea;

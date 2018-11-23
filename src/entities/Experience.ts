@@ -7,6 +7,9 @@ class Experience extends Abstract {
   @Column({ type: "text" })
   text: string;
 
+  @Column({ type: "text" })
+  period: string;
+
   @ManyToOne(type => Trainer, trainer => trainer.experiences)
   trainer: Trainer;
 

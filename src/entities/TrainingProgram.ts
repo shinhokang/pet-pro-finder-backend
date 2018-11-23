@@ -6,6 +6,9 @@ import ProblemCategory from "./ProblemCategory";
 @Entity()
 class TrainingProgram extends Abstract {
   @Column({ type: "text", nullable: true })
+  title: string | null;
+
+  @Column({ type: "text", nullable: true })
   description: string | null;
 
   @Column({ type: "integer", nullable: true })
