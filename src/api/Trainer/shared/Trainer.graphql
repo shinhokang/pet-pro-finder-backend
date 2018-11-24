@@ -1,6 +1,6 @@
 type Trainer {
   id: Int!
-  title: String
+  title: String!
   description: String!
   images: [String]
   videos: [String]

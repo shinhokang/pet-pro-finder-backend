@@ -13,8 +13,8 @@ class Comment extends Abstract {
   })
   parentComment: Comment;
 
-  @Column({ type: "integer" })
-  parentCommentId: number;
+  @Column({ nullable: true })
+  parentCommentId: number | null;
 
   @OneToMany(type => Comment, comment => comment.parentComment, {
     nullable: true
@@ -24,13 +24,13 @@ class Comment extends Abstract {
   @ManyToOne(type => User, user => user.comments)
   user: User;
 
-  @Column({ type: "integer" })
+  @Column()
   userId: number;
 
   @ManyToOne(type => Trainer, trainer => trainer.comments)
   trainer: Trainer;
 
-  @Column({ type: "integer" })
+  @Column()
   trainerId: number;
 }
 

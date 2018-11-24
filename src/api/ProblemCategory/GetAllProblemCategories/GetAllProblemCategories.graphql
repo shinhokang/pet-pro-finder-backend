@@ -1,0 +1,9 @@
+type GetAllProblemCategoriesResponse {
+  ok: Boolean!
+  error: String
+  problemCategories: [ProblemCategory]
+}
+
+type Query {
+  GetAllProblemCategories: GetAllProblemCategoriesResponse!
+}

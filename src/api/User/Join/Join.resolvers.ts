@@ -7,14 +7,7 @@ import bcrypt from "bcrypt";
 const resolvers: Resolvers = {
   Mutation: {
     Join: async (_, args: JoinMutationArgs): Promise<JoinResponse> => {
-      const {
-        email,
-        password,
-        name,
-        phoneNumber,
-        description,
-        profileImage
-      } = args;
+      const { email, password, name } = args;
 
       try {
         const user = await User.findOne({ email });
@@ -27,10 +20,7 @@ const resolvers: Resolvers = {
         const newUser = await User.create({
           email,
           password: passwordHash,
-          name,
-          phoneNumber,
-          description,
-          profileImage
+          name
         }).save();
         const token = await createJWT(newUser.id);
         return {

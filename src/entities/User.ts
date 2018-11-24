@@ -39,7 +39,7 @@ class User extends Abstract {
   @Column({ type: "text", nullable: true })
   profileImage: string | null;
 
-  @Column({ type: "integer", nullable: true })
+  @Column({ nullable: true })
   trainerId: number | null;
 
   @OneToOne(type => Trainer, trainer => trainer.user)

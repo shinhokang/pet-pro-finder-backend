@@ -11,13 +11,13 @@ class Favorite extends Abstract {
   @ManyToOne(type => User, user => user.favorites)
   user: User;
 
-  @Column({ type: "integer" })
+  @Column()
   userId: number;
 
   @ManyToOne(type => Trainer, trainer => trainer.favorites)
   trainer: Trainer;
 
-  @Column({ type: "integer" })
+  @Column()
   trainerId: number;
 }
 

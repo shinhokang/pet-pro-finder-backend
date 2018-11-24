@@ -13,7 +13,7 @@ class Experience extends Abstract {
   @ManyToOne(type => Trainer, trainer => trainer.experiences)
   trainer: Trainer;
 
-  @Column({ type: "integer" })
+  @Column()
   trainerId: number;
 }
 

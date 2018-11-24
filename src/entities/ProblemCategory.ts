@@ -5,6 +5,9 @@ import Abstract from "./Abstract";
 class ProblemCategory extends Abstract {
   @Column({ type: "text" })
   name: string;
+
+  @Column()
+  order: number;
 }
 
 export default ProblemCategory;

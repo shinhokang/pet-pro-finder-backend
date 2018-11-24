@@ -4,7 +4,6 @@ type WorkingArea {
   parentWorkingArea: WorkingArea
   parentWorkingAreaId: Int
   childWorkingAreas: [WorkingArea]
-  trainers: [Trainer]
   createdAt: String!
   updatedAt: String
 }

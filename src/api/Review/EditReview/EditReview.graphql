@@ -6,8 +6,10 @@ type EditReviewResponse {
 type Mutation {
   EditReview(
     reviewId: Int!
+    title: String!
     text: String!
     ratingForExpertise: Float!
     ratingForFriendliness: Float!
+    problemCategoryIds: [Int]
   ): EditReviewResponse!
 }

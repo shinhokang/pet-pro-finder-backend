@@ -7,6 +7,8 @@ import {
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
+import ProblemCategory from "../../../entities/ProblemCategory";
+import { In } from "typeorm";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -18,10 +20,12 @@ const resolvers: Resolvers = {
       ): Promise<CreateReviewResponse> => {
         const user: User = req.user;
         const {
+          title,
           text,
           ratingForExpertise,
           ratingForFriendliness,
-          trainerId
+          trainerId,
+          problemCategoryIds
         } = args;
         try {
           let trainer: Trainer | undefined;
@@ -35,12 +39,24 @@ const resolvers: Resolvers = {
               review: null
             };
           }
+
+          let problemCategories: ProblemCategory[] | undefined;
+          if (problemCategoryIds) {
+            problemCategories = await ProblemCategory.find({
+              where: {
+                id: In(problemCategoryIds)
+              }
+            });
+          }
+
           const newReview = await Review.create({
+            title,
             text,
             ratingForExpertise,
             ratingForFriendliness,
             trainer,
-            user
+            user,
+            problemCategories
           }).save();
 
           if (!newReview) {

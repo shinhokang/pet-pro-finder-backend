@@ -1,7 +1,8 @@
-export const typeDefs = ["type CreateCommentResponse {\n  ok: Boolean!\n  error: String\n  comment: Comment\n}\n\ntype Mutation {\n  CreateComment(text: String!, trainerId: Int!, commentId: Int): CreateCommentResponse!\n  DeleteComment(commentId: Int!): DeleteCommentResponse!\n  EditComment(commentId: Int!, text: String!): EditCommentResponse!\n  ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!\n  CreateReview(trainerId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): CreateReviewResponse!\n  DeleteReview(reviewId: Int!): DeleteReviewResponse!\n  EditReview(reviewId: Int!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!): EditReviewResponse!\n  CreateTrainer(description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): CreateTrainerResponse!\n  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): EditTrainerResponse!\n  CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!\n  DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!\n  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!\n  EditUser(name: String, password: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!\n  Join(email: String!, password: String!, name: String, phoneNumber: String, description: String, profileImage: String): JoinResponse!\n  Login(email: String!, password: String!): LoginResponse!\n}\n\ntype DeleteCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Comment {\n  id: Int!\n  text: String!\n  parentComment: Comment\n  parentCommentId: Int\n  childComments: [Comment]\n  user: User!\n  userId: Int\n  trainer: Trainer!\n  trainerId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Experience {\n  id: Int!\n  text: String!\n  period: String!\n  trainer: Trainer!\n  trainerId: Int!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Favorite {\n  id: Int!\n  marked: Boolean!\n  user: User!\n  userId: Int\n  trainer: Trainer!\n  trainerId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype ToggleFavoriteResponse {\n  ok: Boolean!\n  error: String\n  add: Boolean!\n}\n\ntype License {\n  id: Int!\n  name: String!\n  organization: String\n  createdAt: String!\n  updatedAt: String\n}\n\ntype ProblemCategory {\n  id: Int!\n  name: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateReviewResponse {\n  ok: Boolean!\n  error: String\n  review: Review\n}\n\ntype DeleteReviewResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditReviewResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Review {\n  id: Int!\n  title: String!\n  text: String!\n  ratingForExpertise: Float!\n  ratingForFriendliness: Float!\n  user: User!\n  userId: Int!\n  trainer: Trainer!\n  trainerId: Int!\n  problemCategories: [ProblemCategory]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateTrainerResponse {\n  ok: Boolean!\n  error: String\n  trainer: Trainer\n}\n\ntype EditTrainerResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype FilterTrainersResponse {\n  ok: Boolean!\n  error: String\n  trainers: [Trainer]\n  page: Int!\n  totalPages: Int!\n}\n\ntype Query {\n  FilterTrainers(workingAreas: [String], page: Int, take: Int): FilterTrainersResponse!\n  GetAllTrainers: GetAllTrainersResponse!\n  GetTrainer(trainerId: Int!): GetTrainerResponse!\n  Me: MeResponse!\n}\n\ntype GetAllTrainersResponse {\n  ok: Boolean!\n  error: String\n  trainers: [Trainer]\n}\n\ntype GetTrainerResponse {\n  ok: Boolean!\n  error: String\n  trainer: Trainer\n}\n\ntype Trainer {\n  id: Int!\n  title: String\n  description: String!\n  images: [String]\n  videos: [String]\n  experiences: [Experience]\n  user: User!\n  userId: Int!\n  trainingPrograms: [TrainingProgram]\n  comments: [Comment]\n  reviews: [Review]\n  favorites: [Favorite]\n  workingAreas: [WorkingArea]\n  licenses: [License]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n  trainingProgram: TrainingProgram\n}\n\ntype DeleteTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype TrainingProgram {\n  id: Int!\n  title: String\n  description: String\n  price: Int\n  images: [String]\n  videos: [String]\n  trainer: Trainer!\n  trainerId: Int!\n  problemCategories: [ProblemCategory]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype JoinResponse {\n  ok: Boolean!\n  error: String\n  token: String\n  isNew: Boolean!\n}\n\ntype LoginResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype MeResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  id: Int!\n  email: String!\n  name: String\n  password: String\n  naverId: String\n  kakaoId: String\n  fbId: String\n  googleId: String\n  phoneNumber: String\n  description: String\n  profileImage: String\n  trainerId: Int\n  trainer: Trainer\n  isTrainer: Boolean!\n  comments: [Comment]\n  reviews: [Review]\n  favorites: [Favorite]\n  profilePhoto: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype WorkingArea {\n  id: Int!\n  text: String!\n  parentWorkingArea: WorkingArea\n  parentWorkingAreaId: Int\n  childWorkingAreas: [WorkingArea]\n  trainers: [Trainer]\n  createdAt: String!\n  updatedAt: String\n}\n"];
+export const typeDefs = ["type CreateCommentResponse {\n  ok: Boolean!\n  error: String\n  comment: Comment\n}\n\ntype Mutation {\n  CreateComment(text: String!, trainerId: Int!, commentId: Int): CreateCommentResponse!\n  DeleteComment(commentId: Int!): DeleteCommentResponse!\n  EditComment(commentId: Int!, text: String!): EditCommentResponse!\n  ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!\n  CreateReview(trainerId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int!]): CreateReviewResponse!\n  DeleteReview(reviewId: Int!): DeleteReviewResponse!\n  EditReview(reviewId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int]): EditReviewResponse!\n  CreateTrainer(title: String!, description: String!, images: [String], videos: [String], licenses: [String], experiences: [String], workingAreas: [String]): CreateTrainerResponse!\n  EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): EditTrainerResponse!\n  CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!\n  DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!\n  EditTrainingProgram(trainingProgramId: Int!, description: String, price: Int, images: [String], videos: [String]): EditTrainingProgramResponse!\n  EditUser(name: String, password: String, phoneNumber: String, description: String, profileImage: String): EditUserResponse!\n  Join(email: String!, password: String!, name: String!): JoinResponse!\n  Login(email: String!, password: String!): LoginResponse!\n}\n\ntype DeleteCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditCommentResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Comment {\n  id: Int!\n  text: String!\n  parentComment: Comment\n  parentCommentId: Int\n  childComments: [Comment]\n  user: User!\n  userId: Int\n  trainer: Trainer!\n  trainerId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Experience {\n  id: Int!\n  text: String!\n  period: String!\n  trainer: Trainer!\n  trainerId: Int!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Favorite {\n  id: Int!\n  marked: Boolean!\n  user: User!\n  userId: Int\n  trainer: Trainer!\n  trainerId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype ToggleFavoriteResponse {\n  ok: Boolean!\n  error: String\n  add: Boolean!\n}\n\ntype License {\n  id: Int!\n  name: String!\n  organization: String\n  createdAt: String!\n  updatedAt: String\n}\n\ntype GetAllProblemCategoriesResponse {\n  ok: Boolean!\n  error: String\n  problemCategories: [ProblemCategory]\n}\n\ntype Query {\n  GetAllProblemCategories: GetAllProblemCategoriesResponse!\n  FilterTrainers(workingAreas: [String], page: Int, take: Int): FilterTrainersResponse!\n  GetAllTrainers: GetAllTrainersResponse!\n  GetTrainer(trainerId: Int!): GetTrainerResponse!\n  Me: MeResponse!\n}\n\ntype ProblemCategory {\n  id: Int!\n  name: String!\n  order: Int!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateReviewResponse {\n  ok: Boolean!\n  error: String\n  review: Review\n}\n\ntype DeleteReviewResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditReviewResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Review {\n  id: Int!\n  title: String!\n  text: String!\n  ratingForExpertise: Float!\n  ratingForFriendliness: Float!\n  user: User!\n  userId: Int!\n  trainer: Trainer!\n  trainerId: Int!\n  problemCategories: [ProblemCategory]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateTrainerResponse {\n  ok: Boolean!\n  error: String\n  trainer: Trainer\n}\n\ntype EditTrainerResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype FilterTrainersResponse {\n  ok: Boolean!\n  error: String\n  trainers: [Trainer]\n  page: Int!\n  totalPages: Int!\n}\n\ntype GetAllTrainersResponse {\n  ok: Boolean!\n  error: String\n  trainers: [Trainer]\n}\n\ntype GetTrainerResponse {\n  ok: Boolean!\n  error: String\n  trainer: Trainer\n}\n\ntype Trainer {\n  id: Int!\n  title: String!\n  description: String!\n  images: [String]\n  videos: [String]\n  experiences: [Experience]\n  user: User!\n  userId: Int!\n  trainingPrograms: [TrainingProgram]\n  comments: [Comment]\n  reviews: [Review]\n  favorites: [Favorite]\n  workingAreas: [WorkingArea]\n  licenses: [License]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CreateTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n  trainingProgram: TrainingProgram\n}\n\ntype DeleteTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditTrainingProgramResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype TrainingProgram {\n  id: Int!\n  title: String\n  description: String\n  price: Int\n  images: [String]\n  videos: [String]\n  trainer: Trainer!\n  trainerId: Int!\n  problemCategories: [ProblemCategory]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype JoinResponse {\n  ok: Boolean!\n  error: String\n  token: String\n  isNew: Boolean!\n}\n\ntype LoginResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype MeResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  id: Int!\n  email: String!\n  name: String\n  password: String\n  naverId: String\n  kakaoId: String\n  fbId: String\n  googleId: String\n  phoneNumber: String\n  description: String\n  profileImage: String\n  trainerId: Int\n  trainer: Trainer\n  comments: [Comment]\n  reviews: [Review]\n  favorites: [Favorite]\n  isTrainer: Boolean!\n  profilePhoto: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype WorkingArea {\n  id: Int!\n  text: String!\n  parentWorkingArea: WorkingArea\n  parentWorkingAreaId: Int\n  childWorkingAreas: [WorkingArea]\n  createdAt: String!\n  updatedAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  GetAllProblemCategories: GetAllProblemCategoriesResponse;
   FilterTrainers: FilterTrainersResponse;
   GetAllTrainers: GetAllTrainersResponse;
   GetTrainer: GetTrainerResponse;
@@ -18,6 +19,20 @@ export interface GetTrainerQueryArgs {
   trainerId: number;
 }
 
+export interface GetAllProblemCategoriesResponse {
+  ok: boolean;
+  error: string | null;
+  problemCategories: Array<ProblemCategory> | null;
+}
+
+export interface ProblemCategory {
+  id: number;
+  name: string;
+  order: number;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
 export interface FilterTrainersResponse {
   ok: boolean;
   error: string | null;
@@ -28,7 +43,7 @@ export interface FilterTrainersResponse {
 
 export interface Trainer {
   id: number;
-  title: string | null;
+  title: string;
   description: string;
   images: Array<string> | null;
   videos: Array<string> | null;
@@ -69,10 +84,10 @@ export interface User {
   profileImage: string | null;
   trainerId: number | null;
   trainer: Trainer | null;
-  isTrainer: boolean;
   comments: Array<Comment> | null;
   reviews: Array<Review> | null;
   favorites: Array<Favorite> | null;
+  isTrainer: boolean;
   profilePhoto: string;
   createdAt: string;
   updatedAt: string | null;
@@ -103,13 +118,6 @@ export interface Review {
   trainer: Trainer;
   trainerId: number;
   problemCategories: Array<ProblemCategory> | null;
-  createdAt: string;
-  updatedAt: string | null;
-}
-
-export interface ProblemCategory {
-  id: number;
-  name: string;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -145,7 +153,6 @@ export interface WorkingArea {
   parentWorkingArea: WorkingArea | null;
   parentWorkingAreaId: number | null;
   childWorkingAreas: Array<WorkingArea> | null;
-  trainers: Array<Trainer> | null;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -215,9 +222,11 @@ export interface ToggleFavoriteMutationArgs {
 
 export interface CreateReviewMutationArgs {
   trainerId: number;
+  title: string;
   text: string;
   ratingForExpertise: number;
   ratingForFriendliness: number;
+  problemCategoryIds: Array<number>;
 }
 
 export interface DeleteReviewMutationArgs {
@@ -226,18 +235,21 @@ export interface DeleteReviewMutationArgs {
 
 export interface EditReviewMutationArgs {
   reviewId: number;
+  title: string;
   text: string;
   ratingForExpertise: number;
   ratingForFriendliness: number;
+  problemCategoryIds: Array<number> | null;
 }
 
 export interface CreateTrainerMutationArgs {
+  title: string;
   description: string;
+  images: Array<string> | null;
+  videos: Array<string> | null;
   licenses: Array<string> | null;
   experiences: Array<string> | null;
   workingAreas: Array<string> | null;
-  images: Array<string> | null;
-  videos: Array<string> | null;
 }
 
 export interface EditTrainerMutationArgs {
@@ -282,10 +294,7 @@ export interface EditUserMutationArgs {
 export interface JoinMutationArgs {
   email: string;
   password: string;
-  name: string | null;
-  phoneNumber: string | null;
-  description: string | null;
-  profileImage: string | null;
+  name: string;
 }
 
 export interface LoginMutationArgs {

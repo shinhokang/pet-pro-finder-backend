@@ -17,7 +17,12 @@ const resolvers: Resolvers = {
       ): Promise<DeleteReviewResponse> => {
         const user: User = req.user;
         try {
-          const review = await Review.findOne({ id: args.reviewId });
+          const review = await Review.findOne({
+            where: {
+              id: args.reviewId,
+              userId: user.id
+            }
+          });
           if (!review) {
             return {
               ok: false,
@@ -25,12 +30,6 @@ const resolvers: Resolvers = {
             };
           }
 
-          if (review.userId !== user.id) {
-            return {
-              ok: false,
-              error: "Cant delete"
-            };
-          }
           review.remove();
           return {
             ok: true,

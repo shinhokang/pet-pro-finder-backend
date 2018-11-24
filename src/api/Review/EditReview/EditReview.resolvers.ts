@@ -1,11 +1,13 @@
 import Review from "../../../entities/Review";
 import User from "../../../entities/User";
+import ProblemCategory from "../../../entities/ProblemCategory";
 import {
   EditReviewMutationArgs,
   EditReviewResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
+import { In } from "typeorm";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -16,16 +18,36 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<EditReviewResponse> => {
         const user: User = req.user;
+        const {
+          reviewId,
+          title,
+          text,
+          ratingForExpertise,
+          ratingForFriendliness,
+          problemCategoryIds
+        } = args;
+
         try {
+          let problemCategories: ProblemCategory[] | undefined;
+          if (problemCategoryIds) {
+            problemCategories = await ProblemCategory.find({
+              where: {
+                id: In(problemCategoryIds)
+              }
+            });
+          }
+
           await Review.update(
             {
               user: user,
-              id: args.reviewId
+              id: reviewId
             },
             {
-              text: args.text,
-              ratingForExpertise: args.ratingForExpertise,
-              ratingForFriendliness: args.ratingForFriendliness
+              title,
+              text,
+              ratingForExpertise,
+              ratingForFriendliness,
+              problemCategories
             }
           );
           return {

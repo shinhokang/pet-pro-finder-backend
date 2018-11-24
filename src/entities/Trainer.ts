@@ -18,10 +18,10 @@ import WorkingArea from "./WorkingArea";
 
 @Entity()
 class Trainer extends Abstract {
-  @Column({ type: "text", nullable: true })
-  title: string | null;
+  @Column({ type: "text" })
+  title: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "text" })
   description: string;
 
   @Column({ type: "simple-array", nullable: true })
@@ -36,7 +36,7 @@ class Trainer extends Abstract {
   @OneToOne(type => User, user => user.trainer)
   user: User;
 
-  @Column({ type: "integer" })
+  @Column()
   userId: number;
 
   @OneToMany(

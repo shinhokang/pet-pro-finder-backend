@@ -23,7 +23,7 @@ class TrainingProgram extends Abstract {
   @ManyToOne(type => Trainer, trainer => trainer.trainingPrograms)
   trainer: Trainer;
 
-  @Column({ type: "integer" })
+  @Column()
   trainerId: number;
 
   @ManyToMany(type => ProblemCategory)
