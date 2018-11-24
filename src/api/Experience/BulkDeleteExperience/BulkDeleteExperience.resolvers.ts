@@ -26,10 +26,6 @@ const resolvers: Resolvers = {
         }
 
         try {
-          // await Experience.delete({
-          //   id: In(experienceIds),
-          //   trainerId: trainerId
-          // });
           experienceIds.forEach(async id => {
             await getConnection()
               .createQueryBuilder()
