@@ -1,0 +1,9 @@
+type GetAllLicensesResponse {
+  ok: Boolean!
+  error: String
+  licenses: [License]
+}
+
+type Mutation {
+  GetAllLicenses: GetAllLicensesResponse!
+}

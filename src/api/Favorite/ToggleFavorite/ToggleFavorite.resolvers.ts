@@ -23,7 +23,8 @@ const resolvers: Resolvers = {
             user
           });
           if (existingFavorite) {
-            existingFavorite.remove();
+            existingFavorite.marked = !existingFavorite.marked;
+            await existingFavorite.save();
             return {
               ok: true,
               error: null,
@@ -40,7 +41,10 @@ const resolvers: Resolvers = {
             };
           }
           await Favorite.create({
+            marked: true,
+            userId: user.id,
             user,
+            trainerId: args.trainerId,
             trainer
           }).save();
 

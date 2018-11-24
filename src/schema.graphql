@@ -11,6 +11,8 @@ type Mutation {
   BulkDeleteExperience(trainerId: Int!, experienceIds: [Int!]!): BulkDeleteExperienceResponse!
   BulkEditExperience(trainerId: Int!, experienceIds: [Int]!, texts: [String]!, periods: [String]!): BulkEditExperienceResponse!
   ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
+  CreateLicense(name: String!, organization: String): CreateLicenseResponse!
+  GetAllLicenses: GetAllLicensesResponse!
   CreateReview(trainerId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int!]): CreateReviewResponse!
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
   EditReview(reviewId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int]): EditReviewResponse!
@@ -84,6 +86,18 @@ type ToggleFavoriteResponse {
   ok: Boolean!
   error: String
   add: Boolean!
+}
+
+type CreateLicenseResponse {
+  ok: Boolean!
+  error: String
+  license: License
+}
+
+type GetAllLicensesResponse {
+  ok: Boolean!
+  error: String
+  licenses: [License]
 }
 
 type License {

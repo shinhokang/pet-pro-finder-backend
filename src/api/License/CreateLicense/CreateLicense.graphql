@@ -1,0 +1,9 @@
+type CreateLicenseResponse {
+  ok: Boolean!
+  error: String
+  license: License
+}
+
+type Mutation {
+  CreateLicense(name: String!, organization: String): CreateLicenseResponse!
+}
