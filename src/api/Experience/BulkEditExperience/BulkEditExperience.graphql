@@ -1,0 +1,14 @@
+type BulkEditExperienceResponse {
+  ok: Boolean!
+  error: String
+  experiences: [Experience]
+}
+
+type Mutation {
+  BulkEditExperience(
+    trainerId: Int!
+    experienceIds: [Int]!
+    texts: [String]!
+    periods: [String]!
+  ): BulkEditExperienceResponse!
+}

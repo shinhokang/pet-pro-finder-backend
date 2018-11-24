@@ -8,11 +8,13 @@ type Mutation {
   CreateComment(text: String!, trainerId: Int!, commentId: Int): CreateCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, text: String!): EditCommentResponse!
+  BulkDeleteExperience(trainerId: Int!, experienceIds: [Int!]!): BulkDeleteExperienceResponse!
+  BulkEditExperience(trainerId: Int!, experienceIds: [Int]!, texts: [String]!, periods: [String]!): BulkEditExperienceResponse!
   ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
   CreateReview(trainerId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int!]): CreateReviewResponse!
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
   EditReview(reviewId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int]): EditReviewResponse!
-  CreateTrainer(title: String!, description: String!, images: [String], videos: [String], licenses: [String], experiences: [String], workingAreas: [String]): CreateTrainerResponse!
+  CreateTrainer(title: String!, description: String!, images: [String], videos: [String]): CreateTrainerResponse!
   EditTrainer(trainerId: Int!, description: String!, licenses: [String], experiences: [String], workingAreas: [String], images: [String], videos: [String]): EditTrainerResponse!
   CreateTrainingProgram(trainerId: Int!, description: String!, price: Int!, problemCategories: [String], images: [String], videos: [String]): CreateTrainingProgramResponse!
   DeleteTrainingProgram(trainingProgramId: Int!): DeleteTrainingProgramResponse!
@@ -44,6 +46,17 @@ type Comment {
   trainerId: Int
   createdAt: String!
   updatedAt: String
+}
+
+type BulkDeleteExperienceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type BulkEditExperienceResponse {
+  ok: Boolean!
+  error: String
+  experiences: [Experience]
 }
 
 type Experience {

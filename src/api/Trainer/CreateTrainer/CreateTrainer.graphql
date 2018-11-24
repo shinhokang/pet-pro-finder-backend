@@ -10,8 +10,5 @@ type Mutation {
     description: String!
     images: [String]
     videos: [String]
-    licenses: [String]
-    experiences: [String]
-    workingAreas: [String]
   ): CreateTrainerResponse!
 }

@@ -1,0 +1,11 @@
+type BulkDeleteExperienceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  BulkDeleteExperience(
+    trainerId: Int!
+    experienceIds: [Int!]!
+  ): BulkDeleteExperienceResponse!
+}

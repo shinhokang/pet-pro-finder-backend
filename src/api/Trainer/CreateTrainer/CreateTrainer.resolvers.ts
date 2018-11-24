@@ -1,104 +1,95 @@
-// import Trainer from "../../../entities/Trainer";
-// import User from "../../../entities/User";
-// import {
-//   CreateTrainerMutationArgs,
-//   CreateTrainerResponse
-// } from "../../../types/graph";
-// import { Resolvers } from "../../../types/resolvers";
-// import privateResolver from "../../../utils/privateResolver";
+import Trainer from "../../../entities/Trainer";
+import User from "../../../entities/User";
+import {
+  CreateTrainerMutationArgs,
+  CreateTrainerResponse
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/privateResolver";
 // import License from "../../../entities/License";
 // import Experience from "../../../entities/Experience";
 // import WorkingArea from "../../../entities/WorkingArea";
+// import { In } from "typeorm";
 
-// // TODO: find an elegant way to do Create relations
+const resolvers: Resolvers = {
+  Mutation: {
+    CreateTrainer: privateResolver(
+      async (
+        _,
+        args: CreateTrainerMutationArgs,
+        { req }
+      ): Promise<CreateTrainerResponse> => {
+        const user: User = req.user;
+        const {
+          title,
+          description,
+          images,
+          videos
+          // workingAreaIds,
+          // licenseIds,
+          // experienceIds
+        } = args;
+        try {
+          if (user.isTrainer) {
+            throw new Error("Trainer already exists");
+          }
+          let newTrainer = new Trainer();
+          newTrainer.title = title;
+          newTrainer.description = description;
+          newTrainer.images = images;
+          newTrainer.videos = videos;
+          newTrainer.user = user;
+          newTrainer.userId = user.id;
 
-// const resolvers: Resolvers = {
-//   Mutation: {
-//     CreateTrainer: privateResolver(
-//       async (
-//         _,
-//         args: CreateTrainerMutationArgs,
-//         { req }
-//       ): Promise<CreateTrainerResponse> => {
-//         const user: User = req.user;
-//         const {
-//           title,
-//           description,
-//           licenses,
-//           experiences,
-//           workingAreas,
-//           images,
-//           videos
-//         } = args;
-//         try {
-//           if (user.isTrainer) {
-//             throw new Error("Trainer already exists");
-//           }
-//           let newTrainer = new Trainer();
-//           newTrainer.title = title;
-//           newTrainer.description = description;
-//           newTrainer.images = images;
-//           newTrainer.videos = videos;
-//           newTrainer.user = user;
+          // let workingAreas: WorkingArea[];
+          // if (workingAreaIds) {
+          //   workingAreas = await WorkingArea.find({
+          //     where: {
+          //       id: In(workingAreaIds)
+          //     }
+          //   });
+          //   newTrainer.workingAreas = workingAreas;
+          // }
 
-//           await newTrainer.save();
-//           if (licenses) {
-//             try {
-//               let newLicenses = licenses.map(license => {
+          // let licenses: License[] | undefined;
+          // if (licenseIds) {
+          //   licenses = await License.find({
+          //     where: {
+          //       id: In(licenseIds)
+          //     }
+          //   });
+          //   newTrainer.licenses = licenses;
+          // }
 
-//                 let newLicense = new License();
-//                 newLicense.text = license;
-//                 newLicense.trainer = newTrainer;
-//                 newLicense.save();
-//                 return newLicense;
-//               });
-//               newTrainer.licenses = newLicenses;
-//             } catch (error) {}
-//           }
+          // let experiences: Experience[] | undefined;
+          // if (experienceIds) {
+          //   experiences = await Experience.find({
+          //     where: {
+          //       id: In(experienceIds)
+          //     }
+          //   });
+          //   newTrainer.experiences = experiences;
+          // }
 
-//           if (experiences) {
-//             try {
-//               let newExperiences = experiences.map(experience => {
-//                 let newExperience = new Experience();
-//                 newExperience.text = experience;
-//                 newExperience.trainer = newTrainer;
-//                 newExperience.save();
-//                 return newExperience;
-//               });
-//               newTrainer.experiences = newExperiences;
-//             } catch (error) {}
-//           }
+          await newTrainer.save();
 
-//           if (workingAreas) {
-//             try {
-//               let newWorkingAreas = workingAreas.map(workingArea => {
-//                 let newWorkingArea = new WorkingArea();
-//                 newWorkingArea.text = workingArea;
-//                 newWorkingArea.trainer = newTrainer;
-//                 newWorkingArea.save();
-//                 return newWorkingArea;
-//               });
-//               newTrainer.workingAreas = newWorkingAreas;
-//             } catch (error) {}
-//           }
+          user.trainerId = newTrainer.id;
 
-//           await newTrainer.save();
+          return {
+            ok: true,
+            error: null,
+            trainer: newTrainer
+          };
+        } catch (error) {
+          return {
+            error,
+            ok: false,
+            trainer: null
+          };
+        }
+      }
+    )
+  }
+};
 
-//           return {
-//             ok: true,
-//             error: null,
-//             trainer: newTrainer
-//           };
-//         } catch (error) {
-//           return {
-//             error,
-//             ok: false,
-//             trainer: null
-//           };
-//         }
-//       }
-//     )
-//   }
-// };
-
-// export default resolvers;
+export default resolvers;

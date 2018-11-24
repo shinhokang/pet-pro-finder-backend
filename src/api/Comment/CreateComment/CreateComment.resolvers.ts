@@ -38,7 +38,9 @@ const resolvers: Resolvers = {
           const newComment = await Comment.create({
             text,
             trainer,
+            trainerId: trainer ? trainer.id : undefined,
             user,
+            userId: user.id,
             parentComment
           }).save();
           if (!newComment) {
