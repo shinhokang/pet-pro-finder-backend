@@ -21,13 +21,13 @@ class Review extends Abstract {
   @ManyToOne(type => User, user => user.reviews)
   user: User;
 
-  @Column({ type: "number" })
+  @Column({ type: "integer" })
   userId: number;
 
   @ManyToOne(type => Trainer, trainer => trainer.reviews)
   trainer: Trainer;
 
-  @Column({ type: "number" })
+  @Column({ type: "integer" })
   trainerId: number;
 
   @ManyToMany(type => ProblemCategory)

@@ -36,7 +36,7 @@ class Trainer extends Abstract {
   @OneToOne(type => User, user => user.trainer)
   user: User;
 
-  @Column({ type: "number" })
+  @Column({ type: "integer" })
   userId: number;
 
   @OneToMany(

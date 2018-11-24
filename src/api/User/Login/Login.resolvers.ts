@@ -11,14 +11,14 @@ const resolvers: Resolvers = {
       try {
         const user = await User.findOne({ email });
         if (!user) {
-          throw new Error("No user found by email");
+          throw new Error("Login failed");
         }
         const hash = user.password;
         if (!hash) {
-          throw new Error("No password saved");
+          throw new Error("Login failed");
         }
         if (!bcrypt.compareSync(password, hash)) {
-          throw new Error("Password not match");
+          throw new Error("Login failed");
         }
 
         const token = await createJWT(user.id);

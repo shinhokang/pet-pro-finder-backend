@@ -39,12 +39,12 @@ class User extends Abstract {
   @Column({ type: "text", nullable: true })
   profileImage: string | null;
 
-  @Column({ type: "number", nullable: true })
+  @Column({ type: "integer", nullable: true })
   trainerId: number | null;
 
   @OneToOne(type => Trainer, trainer => trainer.user)
   @JoinColumn()
-  trainer: Trainer;
+  trainer: Trainer | null;
 
   @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];

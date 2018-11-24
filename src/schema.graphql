@@ -49,8 +49,9 @@ type Comment {
 type Experience {
   id: Int!
   text: String!
+  period: String!
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   createdAt: String!
   updatedAt: String
 }
@@ -74,9 +75,8 @@ type ToggleFavoriteResponse {
 
 type License {
   id: Int!
-  text: String!
-  trainer: Trainer!
-  trainerId: Int
+  name: String!
+  organization: String
   createdAt: String!
   updatedAt: String
 }
@@ -106,13 +106,14 @@ type EditReviewResponse {
 
 type Review {
   id: Int!
+  title: String!
   text: String!
   ratingForExpertise: Float!
   ratingForFriendliness: Float!
   user: User!
-  userId: Int
+  userId: Int!
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String
@@ -158,17 +159,19 @@ type GetTrainerResponse {
 
 type Trainer {
   id: Int!
+  title: String
   description: String!
-  licenses: [License]
-  experiences: [Experience]
   images: [String]
   videos: [String]
-  workingAreas: [WorkingArea]
+  experiences: [Experience]
   user: User!
+  userId: Int!
   trainingPrograms: [TrainingProgram]
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]
+  workingAreas: [WorkingArea]
+  licenses: [License]
   createdAt: String!
   updatedAt: String
 }
@@ -191,12 +194,13 @@ type EditTrainingProgramResponse {
 
 type TrainingProgram {
   id: Int!
+  title: String
   description: String
   price: Int
   images: [String]
   videos: [String]
   trainer: Trainer!
-  trainerId: Int
+  trainerId: Int!
   problemCategories: [ProblemCategory]
   createdAt: String!
   updatedAt: String
@@ -238,12 +242,12 @@ type User {
   phoneNumber: String
   description: String
   profileImage: String
-  trainer: Trainer
   trainerId: Int
+  trainer: Trainer
+  isTrainer: Boolean!
   comments: [Comment]
   reviews: [Review]
   favorites: [Favorite]
-  isTrainer: Boolean!
   profilePhoto: String!
   createdAt: String!
   updatedAt: String
@@ -252,8 +256,10 @@ type User {
 type WorkingArea {
   id: Int!
   text: String!
-  trainer: Trainer!
-  trainerId: Int
+  parentWorkingArea: WorkingArea
+  parentWorkingAreaId: Int
+  childWorkingAreas: [WorkingArea]
+  trainers: [Trainer]
   createdAt: String!
   updatedAt: String
 }
