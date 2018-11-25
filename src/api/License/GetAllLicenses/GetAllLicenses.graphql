@@ -4,6 +4,6 @@ type GetAllLicensesResponse {
   licenses: [License]
 }
 
-type Mutation {
+type Query {
   GetAllLicenses: GetAllLicensesResponse!
 }

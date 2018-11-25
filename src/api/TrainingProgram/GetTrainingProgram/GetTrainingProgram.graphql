@@ -1,0 +1,9 @@
+type GetTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+  trainingProgram: TrainingProgram
+}
+
+type Query {
+  GetTrainingProgram(trainingProgramId: Int!): GetTrainingProgramResponse!
+}

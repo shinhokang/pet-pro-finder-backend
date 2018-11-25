@@ -30,8 +30,8 @@ class Comment extends Abstract {
   @ManyToOne(type => Trainer, trainer => trainer.comments)
   trainer: Trainer;
 
-  @Column()
-  trainerId: number;
+  @Column({ nullable: true })
+  trainerId: number | null;
 }
 
 export default Comment;

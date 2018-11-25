@@ -20,10 +20,10 @@ const resolvers: Resolvers = {
         const { commentId, text, trainerId } = args;
         try {
           let parentComment: Comment | undefined;
-          let trainer: Trainer | undefined;
           if (commentId) {
             parentComment = await Comment.findOne({ id: commentId });
           }
+          let trainer: Trainer | undefined;
           if (trainerId) {
             trainer = await Trainer.findOne({ id: trainerId });
           }
@@ -38,10 +38,11 @@ const resolvers: Resolvers = {
           const newComment = await Comment.create({
             text,
             trainer,
-            trainerId: trainer ? trainer.id : undefined,
+            trainerId: trainer ? trainer.id : null,
             user,
             userId: user.id,
-            parentComment
+            parentComment,
+            parentCommentId: parentComment ? parentComment.id : null
           }).save();
           if (!newComment) {
             return {

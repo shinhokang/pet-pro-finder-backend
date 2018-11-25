@@ -1,0 +1,9 @@
+type GetAllWorkingAreasResponse {
+  ok: Boolean!
+  error: String
+  workingAreas: [WorkingArea]
+}
+
+type Query {
+  GetAllWorkingAreas: GetAllWorkingAreasResponse!
+}

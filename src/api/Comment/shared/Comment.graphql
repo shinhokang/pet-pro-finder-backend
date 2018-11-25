@@ -6,7 +6,7 @@ type Comment {
   childComments: [Comment]
   user: User!
   userId: Int
-  trainer: Trainer!
+  trainer: Trainer
   trainerId: Int
   createdAt: String!
   updatedAt: String

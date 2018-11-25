@@ -15,8 +15,8 @@ class WorkingArea extends Abstract {
   )
   parentWorkingArea: WorkingArea;
 
-  @Column()
-  parentWorkingAreaId: number;
+  @Column({ nullable: true })
+  parentWorkingAreaId: number | null;
 
   @OneToMany(
     type => WorkingArea,

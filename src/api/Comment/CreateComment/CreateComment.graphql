@@ -7,7 +7,7 @@ type CreateCommentResponse {
 type Mutation {
   CreateComment(
     text: String!
-    trainerId: Int!
+    trainerId: Int
     commentId: Int
   ): CreateCommentResponse!
 }

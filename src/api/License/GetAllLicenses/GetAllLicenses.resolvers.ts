@@ -6,7 +6,13 @@ const resolvers: Resolvers = {
   Query: {
     GetAllLicenses: async (_, __): Promise<GetAllLicensesResponse> => {
       try {
-        const licenses = await License.find();
+        const licenses = await License.find({
+          order: {
+            organization: "ASC",
+            name: "ASC"
+          },
+          cache: true
+        });
         return {
           licenses,
           ok: true,

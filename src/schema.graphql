@@ -5,14 +5,13 @@ type CreateCommentResponse {
 }
 
 type Mutation {
-  CreateComment(text: String!, trainerId: Int!, commentId: Int): CreateCommentResponse!
+  CreateComment(text: String!, trainerId: Int, commentId: Int): CreateCommentResponse!
   DeleteComment(commentId: Int!): DeleteCommentResponse!
   EditComment(commentId: Int!, text: String!): EditCommentResponse!
   BulkDeleteExperience(trainerId: Int!, experienceIds: [Int!]!): BulkDeleteExperienceResponse!
   BulkEditExperience(trainerId: Int!, experienceIds: [Int]!, texts: [String]!, periods: [String]!): BulkEditExperienceResponse!
   ToggleFavorite(trainerId: Int!): ToggleFavoriteResponse!
   CreateLicense(name: String!, organization: String): CreateLicenseResponse!
-  GetAllLicenses: GetAllLicensesResponse!
   CreateReview(trainerId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int!]): CreateReviewResponse!
   DeleteReview(reviewId: Int!): DeleteReviewResponse!
   EditReview(reviewId: Int!, title: String!, text: String!, ratingForExpertise: Float!, ratingForFriendliness: Float!, problemCategoryIds: [Int]): EditReviewResponse!
@@ -44,7 +43,7 @@ type Comment {
   childComments: [Comment]
   user: User!
   userId: Int
-  trainer: Trainer!
+  trainer: Trainer
   trainerId: Int
   createdAt: String!
   updatedAt: String
@@ -100,6 +99,17 @@ type GetAllLicensesResponse {
   licenses: [License]
 }
 
+type Query {
+  GetAllLicenses: GetAllLicensesResponse!
+  GetAllProblemCategories: GetAllProblemCategoriesResponse!
+  FilterTrainers(workingAreas: [String], page: Int, take: Int): FilterTrainersResponse!
+  GetAllTrainers: GetAllTrainersResponse!
+  GetTrainer(trainerId: Int!): GetTrainerResponse!
+  GetTrainingProgram(trainingProgramId: Int!): GetTrainingProgramResponse!
+  Me: MeResponse!
+  GetAllWorkingAreas: GetAllWorkingAreasResponse!
+}
+
 type License {
   id: Int!
   name: String!
@@ -112,14 +122,6 @@ type GetAllProblemCategoriesResponse {
   ok: Boolean!
   error: String
   problemCategories: [ProblemCategory]
-}
-
-type Query {
-  GetAllProblemCategories: GetAllProblemCategoriesResponse!
-  FilterTrainers(workingAreas: [String], page: Int, take: Int): FilterTrainersResponse!
-  GetAllTrainers: GetAllTrainersResponse!
-  GetTrainer(trainerId: Int!): GetTrainerResponse!
-  Me: MeResponse!
 }
 
 type ProblemCategory {
@@ -227,6 +229,12 @@ type EditTrainingProgramResponse {
   error: String
 }
 
+type GetTrainingProgramResponse {
+  ok: Boolean!
+  error: String
+  trainingProgram: TrainingProgram
+}
+
 type TrainingProgram {
   id: Int!
   title: String
@@ -286,6 +294,12 @@ type User {
   profilePhoto: String!
   createdAt: String!
   updatedAt: String
+}
+
+type GetAllWorkingAreasResponse {
+  ok: Boolean!
+  error: String
+  workingAreas: [WorkingArea]
 }
 
 type WorkingArea {
