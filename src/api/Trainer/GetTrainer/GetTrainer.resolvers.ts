@@ -20,9 +20,12 @@ const resolvers: Resolvers = {
               "experiences",
               "workingAreas",
               "comments",
+              "comments.user",
               "comments.childComments",
+              "comments.childComments.user",
               "reviews",
               "reviews.problemCategories",
+              "reviews.user",
               "favorites"
             ]
           }

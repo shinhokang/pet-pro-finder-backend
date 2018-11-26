@@ -8,7 +8,7 @@ type Review {
   userId: Int!
   trainer: Trainer!
   trainerId: Int!
-  problemCategories: [ProblemCategory]
+  problemCategories: [ProblemCategory!]
   createdAt: String!
   updatedAt: String
 }

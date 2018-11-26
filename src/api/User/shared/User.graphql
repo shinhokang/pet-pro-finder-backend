@@ -12,9 +12,9 @@ type User {
   profileImage: String
   trainerId: Int
   trainer: Trainer
-  comments: [Comment]
-  reviews: [Review]
-  favorites: [Favorite]
+  comments: [Comment!]
+  reviews: [Review!]
+  favorites: [Favorite!]
   isTrainer: Boolean!
   profilePhoto: String!
   createdAt: String!

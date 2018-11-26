@@ -1,15 +1,15 @@
-import compression from "compression";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import { NextFunction, Response } from "express";
-import { GraphQLServer } from "graphql-yoga";
-import helmet from "helmet";
-import logger from "morgan";
-import router from "./router";
-import schema from "./schema";
-import decodeJWT from "./utils/decodeJWT";
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { NextFunction, Response } from 'express';
+import { GraphQLServer } from 'graphql-yoga';
+import helmet from 'helmet';
+import logger from 'morgan';
+import router from './router';
+import schema from './schema';
+import decodeJWT from './utils/decodeJWT';
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 
 class App {
   public app: GraphQLServer;
@@ -19,9 +19,9 @@ class App {
       schema,
       context: req => {
         return {
-          req: req.request
+          req: req.request,
         };
-      }
+      },
     });
     this.middlewares();
   }
@@ -34,18 +34,18 @@ class App {
         origin: [
           /\localtunnel\.me$/,
           /\now\.sh$/,
-          "http://127.0.0.1:3000",
-          "http://localhost:3000",
-          "http://localhost:4000"
+          'http://127.0.0.1:3000',
+          'http://localhost:3000',
+          'http://localhost:4000',
         ],
-        credentials: true
+        credentials: true,
       })
     );
     this.app.express.use(helmet());
-    this.app.express.use("/aws", router);
+    this.app.express.use('/aws', router);
     this.app.express.use(this.jwt);
     if (isDev) {
-      this.app.express.use(logger("dev"));
+      this.app.express.use(logger('dev'));
     }
   };
 
@@ -54,14 +54,14 @@ class App {
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const token = req.cookies["X-JWT"] || req.get("X-JWT");
+    const token = req.cookies['X-JWT'] || req.get('X-JWT');
     if (token) {
       const user = await decodeJWT(token);
       if (user) {
         req.user = user;
       } else {
         req.user = undefined;
-        res.clearCookie("X-JWT");
+        res.clearCookie('X-JWT');
       }
     }
     next();

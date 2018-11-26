@@ -3,7 +3,7 @@ type WorkingArea {
   text: String!
   parentWorkingArea: WorkingArea
   parentWorkingAreaId: Int
-  childWorkingAreas: [WorkingArea]
+  childWorkingAreas: [WorkingArea!]
   createdAt: String!
   updatedAt: String
 }
