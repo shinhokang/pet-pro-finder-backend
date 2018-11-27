@@ -32,8 +32,7 @@ class App {
     this.app.express.use(
       cors({
         origin: [
-          /\localtunnel\.me$/,
-          /\now\.sh$/,
+          /\kangshinho\.net$/,
           'http://127.0.0.1:3000',
           'http://localhost:3000',
           'http://localhost:4000',

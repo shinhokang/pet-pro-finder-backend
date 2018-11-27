@@ -1,5 +1,5 @@
 {
-  "name": "petprofinder-server",
+  "name": "animalmind-server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -47,13 +47,5 @@
     "tslint-config-prettier": "^1.14.0",
     "typeorm": "^0.2.8",
     "typescript": "^2.9.2"
-  },
-  "now": {
-    "name": "petprofinder-server",
-    "dotenv": ".env.production",
-    "alias": "petprofinder-api.now.sh",
-    "engines": {
-      "node": "10.x.x"
-    }
   }
 }
